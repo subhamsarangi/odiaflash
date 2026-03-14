@@ -1,4 +1,4 @@
-const CACHE_NAME = 'akshara-v2';
+const CACHE_NAME = 'akshara-v4';
 
 const ASSETS = [
   './',
@@ -9,6 +9,8 @@ const ASSETS = [
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png',
+  './icons/icon-64.png',
+  './icons/icon-64.webp',
 ];
 
 // Install: cache all assets
@@ -35,6 +37,9 @@ self.addEventListener('activate', (event) => {
 
 // Fetch: cache-first strategy (perfect for fully offline apps)
 self.addEventListener('fetch', (event) => {
+  // Only handle GET requests
+  if (event.request.method !== 'GET') return;
+
   event.respondWith(
     caches.match(event.request).then((cached) => {
       if (cached) return cached;

@@ -31,7 +31,10 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Akshara" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Noto+Sans+Oriya:wght@400;700&family=DM+Serif+Display:ital@0;1&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Noto+Sans+Oriya:wght@400;700&family=DM+Serif+Display:ital@0;1&family=Lato:wght@300;400;700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Noto+Sans+Oriya:wght@400;700&family=DM+Serif+Display:ital@0;1&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Noto+Sans+Oriya:wght@400;700&family=DM+Serif+Display:ital@0;1&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"></noscript>
 <script src="./jquery.min.js" defer></script>
 <script src="./main.js" defer></script>
 <link rel="stylesheet" href="./style.css">
@@ -40,7 +43,11 @@
 
 <header>
   <div style="display:flex; align-items:center; gap:12px;">
-    <img src="https://cdn.openworldregister.com/scripts/odia/logo.png" alt="Akshara logo" style="height:40px; width:40px;" onerror="this.onerror=null; this.src='./icons/icon-512.png'" />
+    <picture>
+      <source srcset="./icons/icon-64.webp" type="image/webp">
+      <img src="./icons/icon-64.png" alt="Akshara logo" width="40" height="40" style="height:40px;width:40px;"
+           onerror="this.onerror=null; this.src='./icons/icon-192.png'">
+    </picture>
     <div>
       <h1 class="logo">Akshara <span>ଅକ୍ଷର</span></h1>
       <div class="logo-sub">Learn Odia Script</div>
