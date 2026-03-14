@@ -3,17 +3,17 @@
 // ══════════════════════════════════════════════
 const odiaLetters = [
   // Vowels (Svaras)
-  { letter: "ଅ", roman: "a", type: "vowel", example: 'as in "about"' },
-  { letter: "ଆ", roman: "ā", type: "vowel", example: 'as in "art"' },
-  { letter: "ଇ", roman: "i", type: "vowel", example: 'as in "it"' },
-  { letter: "ଈ", roman: "ī", type: "vowel", example: 'as in "eat"' },
-  { letter: "ଉ", roman: "u", type: "vowel", example: 'as in "put"' },
-  { letter: "ଊ", roman: "ū", type: "vowel", example: 'as in "food"' },
-  { letter: "ଋ", roman: "ṛ", type: "vowel", example: "vocalic r" },
-  { letter: "ଏ", roman: "e", type: "vowel", example: 'as in "they"' },
-  { letter: "ଐ", roman: "ai", type: "vowel", example: 'as in "aisle"' },
-  { letter: "ଓ", roman: "o", type: "vowel", example: 'as in "go"' },
-  { letter: "ଔ", roman: "au", type: "vowel", example: 'as in "out"' },
+  { "letter": "ଅ", "roman": "a", "type": "vowel", "example": "as in 'hot' or 'ball'" },
+  { "letter": "ଆ", "roman": "ā", "type": "vowel", "example": "as in 'father'" },
+  { "letter": "ଇ", "roman": "i", "type": "vowel", "example": "as in 'bit'" },
+  { "letter": "ଈ", "roman": "ī", "type": "vowel", "example": "as in 'feet'" },
+  { "letter": "ଉ", "roman": "u", "type": "vowel", "example": "as in 'put'" },
+  { "letter": "ଊ", "roman": "ū", "type": "vowel", "example": "as in 'boot'" },
+  { "letter": "ଋ", "roman": "ṛ", "type": "vowel", "example": "as in 'rhythm' (pronounced 'ru')" },
+  { "letter": "ଏ", "roman": "e", "type": "vowel", "example": "as in 'bed'" },
+  { "letter": "ଐ", "roman": "ai", "type": "vowel", "example": "as in 'oil'" },
+  { "letter": "ଓ", "roman": "o", "type": "vowel", "example": "as in 'note'" },
+  { "letter": "ଔ", "roman": "au", "type": "vowel", "example": "as in 'loud'" },
 
   // Consonants (Vyanjanas)
   { letter: "କ", roman: "ka", type: "consonant", example: "Velar stop" },
@@ -123,6 +123,40 @@ const odiaLetters = [
 ];
 
 // ══════════════════════════════════════════════
+//  DATA — Odia Words
+// ══════════════════════════════════════════════
+const odiaWords = [
+  // Easy
+  { word: "ଘର", roman: "ghara", meaning: "house", level: "easy" },
+  { word: "ଜଳ", roman: "jaḷa", meaning: "water", level: "easy" },
+  { word: "ମା", roman: "mā", meaning: "mother", level: "easy" },
+  { word: "ବାପା", roman: "bāpā", meaning: "father", level: "easy" },
+  { word: "ଆଖି", roman: "ākhi", meaning: "eye", level: "easy" },
+  { word: "ହାତ", roman: "hāta", meaning: "hand", level: "easy" },
+  { word: "ଗଛ", roman: "gacha", meaning: "tree", level: "easy" },
+  { word: "ଫୁଲ", roman: "phula", meaning: "flower", level: "easy" },
+  { word: "ଚନ୍ଦ୍ର", roman: "chandra", meaning: "moon", level: "easy" },
+  { word: "ସୂର୍ଯ୍ୟ", roman: "sūrya", meaning: "sun", level: "easy" },
+  // Medium
+  { word: "ବିଦ୍ୟାଳୟ", roman: "bidyāḷaya", meaning: "school", level: "medium" },
+  { word: "ପୁସ୍ତକ", roman: "pustaka", meaning: "book", level: "medium" },
+  { word: "ଆକାଶ", roman: "ākāśa", meaning: "sky", level: "medium" },
+  { word: "ସମୁଦ୍ର", roman: "samudra", meaning: "ocean", level: "medium" },
+  { word: "ପ୍ରକୃତି", roman: "prakṛti", meaning: "nature", level: "medium" },
+  { word: "ଭାଷା", roman: "bhāṣā", meaning: "language", level: "medium" },
+  { word: "ସଂଗୀତ", roman: "saṃgīta", meaning: "music", level: "medium" },
+  { word: "ଆନନ୍ଦ", roman: "ānanda", meaning: "joy", level: "medium" },
+  { word: "ଶକ୍ତି", roman: "śakti", meaning: "power/energy", level: "medium" },
+  { word: "ସ୍ୱାଧୀନତା", roman: "swādhīnatā", meaning: "freedom", level: "medium" },
+  // Hard
+  { word: "ସଂସ୍କୃତି", roman: "saṃskṛti", meaning: "culture", level: "hard" },
+  { word: "ପ୍ରତିଷ୍ଠା", roman: "pratiṣṭhā", meaning: "prestige", level: "hard" },
+  { word: "ଅଭିଜ୍ଞତା", roman: "abhijñatā", meaning: "experience", level: "hard" },
+  { word: "ବିଶ୍ୱବ୍ରହ୍ମାଣ୍ଡ", roman: "biśwabrahmāṇḍa", meaning: "universe", level: "hard" },
+  { word: "ପ୍ରତିଭା", roman: "pratibhā", meaning: "talent/genius", level: "hard" },
+];
+
+// ══════════════════════════════════════════════
 //  STATE
 // ══════════════════════════════════════════════
 let practiceQueue = [];
@@ -131,6 +165,8 @@ let isFlipped = false;
 let sessionStats = { easy: 0, good: 0, hard: 0 };
 let hardCards = [];
 let activeFilter = "all";
+let practiceMode = "letters"; // "letters" | "words"
+let wordFilter = "all"; // "all" | "easy" | "medium" | "hard"
 
 let quizQueue = [];
 let quizIdx = 0;
@@ -153,10 +189,37 @@ function shuffle(arr) {
   return a;
 }
 
-function toast(msg) {
+function toast(msg, anchorEl) {
   const $t = $("#toast");
   $t.text(msg).addClass("show");
-  setTimeout(() => $t.removeClass("show"), 2200);
+
+  if (anchorEl) {
+    const rect = anchorEl.getBoundingClientRect();
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const tw = $t[0].offsetWidth;
+    const th = $t[0].offsetHeight;
+
+    let top, left;
+
+    // Prefer below, fallback above
+    if (rect.bottom + th + 12 < vh) {
+      top = rect.bottom + window.scrollY + 10;
+    } else {
+      top = rect.top + window.scrollY - th - 10;
+    }
+
+    // Center on tile, clamp within viewport with padding
+    left = rect.left + window.scrollX + rect.width / 2 - tw / 2;
+    left = Math.max(12, Math.min(left, vw - tw - 12));
+
+    $t.css({ position: "absolute", top: top + "px", left: left + "px", transform: "none", bottom: "auto" });
+  } else {
+    $t.css({ position: "fixed", top: "auto", left: "50%", bottom: "40px", transform: "translateX(-50%)" });
+  }
+
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(() => $t.removeClass("show"), 4000);
 }
 
 function getFiltered() {
@@ -176,7 +239,7 @@ function renderGrid(filter) {
     .map((l) => {
       const prog = progress[l.letter] || "";
       return `
-      <div class="letter-tile ${prog}" data-letter="${l.letter}">
+      <div class="letter-tile ${prog}" data-letter="${l.letter}" data-type="${l.type}">
         <div class="tile-tag"></div>
         <span class="tile-odia">${l.letter}</span>
         <div class="tile-roman">${l.roman}</div>
@@ -190,7 +253,7 @@ function renderGrid(filter) {
 $(document).on("click", ".letter-tile", function () {
   const letter = $(this).data("letter");
   const l = odiaLetters.find((x) => x.letter === letter);
-  toast(`${l.letter}  ·  ${l.roman}  ·  ${l.example}`);
+  toast(`${l.letter}  ·  ${l.roman}  ·  ${l.example}`, this);
 });
 
 $(document).on("click", ".filter-btn", function () {
@@ -230,11 +293,18 @@ function showCard() {
   const total = practiceQueue.length;
   const pct = Math.round((currentCardIdx / total) * 100);
 
-  $("#frontLetter").text(l.letter);
-  $("#backLetter").text(l.letter);
-  $("#backRoman").text(l.roman);
-  $("#backType").text(l.type);
-  $("#backExample").text(l.example);
+  $("#frontLetter").text(l.letter || l.word);
+  if (practiceMode === "words") {
+    $("#backLetter").text(l.word);
+    $("#backRoman").text(l.roman);
+    $("#backType").text(l.level);
+    $("#backExample").text(l.meaning);
+  } else {
+    $("#backLetter").text(l.letter);
+    $("#backRoman").text(l.roman);
+    $("#backType").text(l.type);
+    $("#backExample").text(l.example);
+  }
   $("#cardCounter").text(`${currentCardIdx + 1} / ${total}`);
   $("#progressText").text(`Card ${currentCardIdx + 1} of ${total}`);
   $("#progressPct").text(pct + "%");
@@ -257,14 +327,17 @@ $(document).on("click", ".rate-btn", function () {
   const l = practiceQueue[currentCardIdx];
 
   sessionStats[rating]++;
-  progress[l.letter] = rating;
-  localStorage.setItem("odiaProgress", JSON.stringify(progress));
-
-  if (rating === "hard") hardCards.push(l);
+  if (practiceMode === "letters") {
+    progress[l.letter] = rating;
+    localStorage.setItem("odiaProgress", JSON.stringify(progress));
+    if (rating === "hard") hardCards.push(l);
+  } else {
+    if (rating === "hard") hardCards.push(l);
+  }
 
   currentCardIdx++;
   showCard();
-  renderGrid($(".filter-btn.active").data("filter"));
+  if (practiceMode === "letters") renderGrid($(".filter-btn.active").data("filter"));
 });
 
 function endSession() {
@@ -276,8 +349,12 @@ function endSession() {
   $("#sessionComplete").addClass("visible");
 }
 
-$("#startBtn, #startBtn2").on("click", function () {
-  startSession(getFiltered());
+$("#startBtn2").on("click", function () {
+  if (practiceMode === "words") {
+    startSession(getFilteredWords());
+  } else {
+    startSession(getFiltered());
+  }
 });
 
 $("#shuffleBtn").on("click", function () {
@@ -307,7 +384,66 @@ $("#reviewHardBtn").on("click", function () {
 });
 
 $("#restartBtn").on("click", function () {
-  startSession(getFiltered());
+  if (practiceMode === "words") {
+    startSession(getFilteredWords());
+  } else {
+    startSession(getFiltered());
+  }
+});
+
+// ── Mode toggle ──
+function getFilteredWords() {
+  if (wordFilter === "all") return odiaWords;
+  return odiaWords.filter(w => w.level === wordFilter);
+}
+
+function switchPracticeMode(mode) {
+  practiceMode = mode;
+  $(".mode-btn").removeClass("active");
+  if (mode === "letters") {
+    $("#modeBtnLetters").addClass("active");
+    $("#letterControls").show();
+    $("#wordControls").hide();
+    $("#practiceTitle").text("Flashcard Practice");
+    $("#practiceDesc").text("Tap the card to reveal — then rate yourself");
+    $("#idleGlyph").text("ଓ");
+    $("#idleTitle").text("Ready to practice?");
+    $("#idleDesc").html("Go through all 48 Odia letters<br>and rate how well you know each one.");
+  } else {
+    $("#modeBtnWords").addClass("active");
+    $("#letterControls").hide();
+    $("#wordControls").show();
+    $("#practiceTitle").text("Word Practice");
+    $("#practiceDesc").text("Read the Odia word — tap to see transliteration & meaning");
+    $("#idleGlyph").text("ଶବ୍ଦ");
+    $("#idleTitle").text("Practice Odia Words");
+    $("#idleDesc").html("From simple everyday words<br>to more complex vocabulary.");
+  }
+  // reset to idle
+  $("#cardArena").hide();
+  $("#progressWrap").hide();
+  $("#sessionComplete").removeClass("visible");
+  $("#practiceIdle").show();
+}
+
+$("#modeBtnLetters").on("click", () => switchPracticeMode("letters"));
+$("#modeBtnWords").on("click", () => switchPracticeMode("words"));
+
+$("#shuffleWordsBtn").on("click", function () {
+  if (practiceQueue.length) {
+    practiceQueue = shuffle(practiceQueue);
+    currentCardIdx = 0;
+    showCard();
+    toast("Cards shuffled!");
+  }
+});
+
+const wordLevels = ["all", "easy", "medium", "hard"];
+const wordLabels = ["All words", "Easy only", "Medium only", "Hard only"];
+$("#filterWordsBtn").on("click", function () {
+  const idx = wordLevels.indexOf(wordFilter);
+  wordFilter = wordLevels[(idx + 1) % wordLevels.length];
+  $(this).text(wordLabels[(idx + 1) % wordLevels.length]);
 });
 
 // ══════════════════════════════════════════════
@@ -435,20 +571,32 @@ $("#newQuizBtn").on("click", startQuiz);
 // ══════════════════════════════════════════════
 //  NAV
 // ══════════════════════════════════════════════
-$(".nav-tab").on("click", function () {
-  const view = $(this).data("view");
+//  NAV
+// ══════════════════════════════════════════════
+function switchView(view) {
+  if (!view || !document.getElementById(view)) view = "browse";
   $(".nav-tab").removeClass("active");
-  $(this).addClass("active");
+  $(`.nav-tab[data-view="${view}"]`).addClass("active");
   $(".view").removeClass("active");
   $("#" + view).addClass("active");
-
   if (view === "quiz") startQuiz();
+}
+
+$(".nav-tab").on("click", function () {
+  const view = $(this).data("view");
+  history.pushState({ view }, "", "#" + view);
+  switchView(view);
+});
+
+window.addEventListener("popstate", (e) => {
+  switchView(e.state?.view || location.hash.slice(1));
 });
 
 // ══════════════════════════════════════════════
 //  INIT
 // ══════════════════════════════════════════════
 renderGrid("all");
+switchView(location.hash.slice(1) || "browse");
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/scriptEd/sw.js");
 }
