@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akshara — Learn Odia Script</title>
+<link rel="manifest" href="./manifest.json" />
+<meta name="theme-color" content="#ffffff" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Akshara" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Noto+Sans+Oriya:wght@400;700&family=DM+Serif+Display:ital@0;1&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<script src="./jquery.min.js"></script>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">Akshara <span>ଅକ୍ଷର</span></div>
+    <div class="logo-sub">Learn Odia Script</div>
+  </div>
+  <nav class="nav-tabs">
+    <button class="nav-tab active" data-view="browse">Browse</button>
+    <button class="nav-tab" data-view="practice">Flashcard</button>
+    <button class="nav-tab" data-view="quiz">Quiz</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ══ BROWSE VIEW ══ -->
+  <div id="browse" class="view active">
+    <div class="section-title">All Letters</div>
+    <div class="section-desc">The complete Odia script — vowels, consonants & special characters</div>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="vowel">Vowels</button>
+      <button class="filter-btn" data-filter="consonant">Consonants</button>
+      <button class="filter-btn" data-filter="special">Special</button>
+    </div>
+
+    <div class="letters-grid" id="lettersGrid"></div>
+  </div>
+
+  <!-- ══ PRACTICE VIEW ══ -->
+  <div id="practice" class="view">
+    <div class="practice-header">
+      <div>
+        <div class="section-title">Flashcard Practice</div>
+        <div class="section-desc">Tap the card to reveal — then rate yourself</div>
+      </div>
+      <div class="practice-controls">
+        <button class="btn btn-sm btn-outline" id="shuffleBtn">⇄ Shuffle</button>
+        <button class="btn btn-sm btn-outline" id="filterPracticeBtn">Vowels only</button>
+        <button class="btn btn-sm btn-primary" id="startBtn">Start Session</button>
+      </div>
+    </div>
+
+    <div class="progress-wrap" id="progressWrap" style="display:none">
+      <div class="progress-label">
+        <span id="progressText">Card 1 of 48</span>
+        <span id="progressPct">0%</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    </div>
+
+    <div class="card-arena" id="cardArena" style="display:none">
+      <div class="card-scene" id="cardScene">
+        <div class="card-inner" id="cardInner">
+          <div class="card-face card-front">
+            <div class="card-odia-letter" id="frontLetter">ଅ</div>
+            <div class="card-hint">Tap to reveal</div>
+          </div>
+          <div class="card-face card-back">
+            <div class="back-type" id="backType">vowel</div>
+            <div class="card-back-letter" id="backLetter">ଅ</div>
+            <div class="back-roman" id="backRoman">a</div>
+            <div class="back-example" id="backExample">as in "about"</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-counter" id="cardCounter">1 / 48</div>
+
+      <div class="rating-buttons" id="ratingButtons">
+        <button class="rate-btn rate-hard" data-rating="hard">
+          ✗ Hard
+          <span class="rate-label">Show again soon</span>
+        </button>
+        <button class="rate-btn rate-good" data-rating="good">
+          ~ Good
+          <span class="rate-label">Getting there</span>
+        </button>
+        <button class="rate-btn rate-easy" data-rating="easy">
+          ✓ Easy
+          <span class="rate-label">I know this!</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="session-complete" id="sessionComplete">
+      <div class="complete-icon">🪔</div>
+      <div class="complete-title">Session Complete</div>
+      <div class="complete-sub">You've gone through all the cards in this session</div>
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="stat-num" id="statEasy">0</div>
+          <div class="stat-lbl">Easy</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" id="statGood">0</div>
+          <div class="stat-lbl">Good</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" id="statHard">0</div>
+          <div class="stat-lbl">Hard</div>
+        </div>
+      </div>
+      <button class="btn btn-primary" id="reviewHardBtn">Review Hard Cards</button>
+      &nbsp;
+      <button class="btn btn-outline" id="restartBtn">Start Over</button>
+    </div>
+
+    <!-- Idle state before starting -->
+    <div id="practiceIdle" style="text-align:center; padding:60px 20px">
+      <div style="font-family:'DM Serif Display',serif; font-size:5rem; color:var(--gold); opacity:0.15; margin-bottom:24px;">ଓ</div>
+      <div style="font-family:'DM Serif Display',serif; font-size:1.6rem; color:var(--cream); margin-bottom:10px;">Ready to practice?</div>
+      <div style="color:var(--muted); font-size:0.85rem; margin-bottom:28px;">Go through all 48 Odia letters<br>and rate how well you know each one.</div>
+      <button class="btn btn-primary" id="startBtn2">Begin Session</button>
+    </div>
+  </div>
+
+  <!-- ══ QUIZ VIEW ══ -->
+  <div id="quiz" class="view">
+    <div class="practice-header">
+      <div>
+        <div class="section-title">Multiple Choice Quiz</div>
+        <div class="section-desc">Identify the letter from four options</div>
+      </div>
+      <div style="display:flex; gap:8px; align-items:center">
+        <span style="font-size:0.78rem; color:var(--muted)">Score: </span>
+        <span style="font-family:'DM Serif Display',serif; font-size:1.4rem; color:var(--gold)" id="quizScore">0</span>
+        <span style="color:var(--muted);">/</span>
+        <span style="font-family:'DM Serif Display',serif; font-size:1.4rem; color:var(--muted)" id="quizTotal">0</span>
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span id="quizProgressText">Question 0 of 10</span>
+        <span id="quizPct">0%</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="quizFill" style="width:0%"></div></div>
+    </div>
+
+    <div class="quiz-question">
+      <div class="quiz-odia" id="quizLetter">ଅ</div>
+      <div class="quiz-prompt">What is this letter?</div>
+    </div>
+
+    <div class="quiz-options" id="quizOptions"></div>
+    <div class="quiz-feedback" id="quizFeedback"></div>
+
+    <div style="text-align:center">
+      <button class="btn btn-outline btn-sm" id="nextQuizBtn" style="display:none">Next Question →</button>
+    </div>
+
+    <!-- Quiz complete -->
+    <div class="session-complete" id="quizComplete">
+      <div class="complete-icon">🎯</div>
+      <div class="complete-title" id="quizCompleteTitle">Quiz Done!</div>
+      <div class="complete-sub" id="quizCompleteSub">You scored well</div>
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="stat-num" id="quizFinalScore">0</div>
+          <div class="stat-lbl">Correct</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" id="quizFinalTotal">10</div>
+          <div class="stat-lbl">Total</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" id="quizPctFinal">0%</div>
+          <div class="stat-lbl">Accuracy</div>
+        </div>
+      </div>
+      <button class="btn btn-primary" id="newQuizBtn">New Quiz</button>
+    </div>
+  </div>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script src="./main.js"></script>
+ 
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker
+        .register('./sw.js')
+        .then((reg) => console.log('SW registered:', reg.scope))
+        .catch((err) => console.error('SW failed:', err));
+    });
+  }
+</script>
+
+</body>
+</html>
